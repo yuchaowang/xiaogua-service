@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.AdministratorMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.Administrator">
+    <id column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_code, update_date, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_administrator
+    where user_code = #{userCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_administrator
+    where user_code = #{userCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.Administrator">
+    insert into t_administrator (user_code, update_date, create_date
+      )
+    values (#{userCode,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.Administrator">
+    insert into t_administrator
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.Administrator">
+    update t_administrator
+    <set>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_code = #{userCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.Administrator">
+    update t_administrator
+    set update_date = #{updateDate,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR}
+    where user_code = #{userCode,jdbcType=VARCHAR}
+  </update>
+  <sql id="Table_Base_Column_List">
+    t_administrator.user_code, t_administrator.update_date, t_administrator.create_date
+  </sql>
+</mapper>

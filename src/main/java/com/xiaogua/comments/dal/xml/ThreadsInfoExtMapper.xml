@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.ThreadsInfoMapper">
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from t_threads
+        where 1 = 1
+        <if test="!deleted">
+            and deleted = 0
+        </if>
+        <if test="keyword != null">
+            and title like "%"#{keyword}"%"
+        </if>
+        <if test="isEssence">
+            and is_essence = 1
+        </if>
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        <if test="userCode != null">
+            and user_code = #{userCode}
+        </if>
+    </select>
+    <select id="findPage" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from t_threads
+        where 1 = 1
+        <if test="keyword != null">
+            and title like "%"#{keyword}"%"
+        </if>
+        <if test="isEssence">
+            and is_essence = 1
+        </if>
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        <if test="userCode != null">
+            and user_code = #{userCode}
+        </if>
+        <if test="!deleted">
+            and deleted = 0
+        </if>
+        order by create_date desc
+        limit #{index},#{pageSize}
+    </select>
+</mapper>

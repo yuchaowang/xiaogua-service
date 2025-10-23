@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.CommentsReplyMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.CommentsReply">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="comments_code" jdbcType="VARCHAR" property="commentsCode" />
+    <result column="reply_code" jdbcType="VARCHAR" property="replyCode" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="from_name" jdbcType="VARCHAR" property="fromName" />
+    <result column="from_avatar" jdbcType="VARCHAR" property="fromAvatar" />
+    <result column="to_usercode" jdbcType="VARCHAR" property="toUsercode" />
+    <result column="to_name" jdbcType="VARCHAR" property="toName" />
+    <result column="to_avatar" jdbcType="VARCHAR" property="toAvatar" />
+    <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, comments_code, reply_code, user_code, from_name, from_avatar, to_usercode, 
+    to_name, to_avatar, like_num, content, create_date, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_comments_reply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_comments_reply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.CommentsReply">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_comments_reply (code, comments_code, reply_code, 
+      user_code, from_name, from_avatar, 
+      to_usercode, to_name, to_avatar, 
+      like_num, content, create_date, 
+      deleted)
+    values (#{code,jdbcType=VARCHAR}, #{commentsCode,jdbcType=VARCHAR}, #{replyCode,jdbcType=VARCHAR}, 
+      #{userCode,jdbcType=VARCHAR}, #{fromName,jdbcType=VARCHAR}, #{fromAvatar,jdbcType=VARCHAR}, 
+      #{toUsercode,jdbcType=VARCHAR}, #{toName,jdbcType=VARCHAR}, #{toAvatar,jdbcType=VARCHAR}, 
+      #{likeNum,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.CommentsReply">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_comments_reply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="commentsCode != null">
+        comments_code,
+      </if>
+      <if test="replyCode != null">
+        reply_code,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="fromName != null">
+        from_name,
+      </if>
+      <if test="fromAvatar != null">
+        from_avatar,
+      </if>
+      <if test="toUsercode != null">
+        to_usercode,
+      </if>
+      <if test="toName != null">
+        to_name,
+      </if>
+      <if test="toAvatar != null">
+        to_avatar,
+      </if>
+      <if test="likeNum != null">
+        like_num,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="commentsCode != null">
+        #{commentsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="replyCode != null">
+        #{replyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fromName != null">
+        #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAvatar != null">
+        #{fromAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="toUsercode != null">
+        #{toUsercode,jdbcType=VARCHAR},
+      </if>
+      <if test="toName != null">
+        #{toName,jdbcType=VARCHAR},
+      </if>
+      <if test="toAvatar != null">
+        #{toAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null">
+        #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.CommentsReply">
+    update t_comments_reply
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="commentsCode != null">
+        comments_code = #{commentsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="replyCode != null">
+        reply_code = #{replyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fromName != null">
+        from_name = #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAvatar != null">
+        from_avatar = #{fromAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="toUsercode != null">
+        to_usercode = #{toUsercode,jdbcType=VARCHAR},
+      </if>
+      <if test="toName != null">
+        to_name = #{toName,jdbcType=VARCHAR},
+      </if>
+      <if test="toAvatar != null">
+        to_avatar = #{toAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null">
+        like_num = #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.CommentsReply">
+    update t_comments_reply
+    set code = #{code,jdbcType=VARCHAR},
+      comments_code = #{commentsCode,jdbcType=VARCHAR},
+      reply_code = #{replyCode,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      from_name = #{fromName,jdbcType=VARCHAR},
+      from_avatar = #{fromAvatar,jdbcType=VARCHAR},
+      to_usercode = #{toUsercode,jdbcType=VARCHAR},
+      to_name = #{toName,jdbcType=VARCHAR},
+      to_avatar = #{toAvatar,jdbcType=VARCHAR},
+      like_num = #{likeNum,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_comments_reply
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_comments_reply.id, t_comments_reply.code, t_comments_reply.comments_code, t_comments_reply.reply_code, 
+    t_comments_reply.user_code, t_comments_reply.from_name, t_comments_reply.from_avatar, 
+    t_comments_reply.to_usercode, t_comments_reply.to_name, t_comments_reply.to_avatar, 
+    t_comments_reply.like_num, t_comments_reply.content, t_comments_reply.create_date, 
+    t_comments_reply.deleted
+  </sql>
+</mapper>

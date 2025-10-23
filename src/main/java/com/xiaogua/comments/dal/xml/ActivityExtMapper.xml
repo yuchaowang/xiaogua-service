@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.ActivityMapper">
+  <select id="count" resultType="java.lang.Integer">
+    select count(1)
+    from t_activity
+    <where>
+      <if test="name != null and name != ''">
+        name like "%"#{name}"%"
+      </if>
+      <if test="isFree != null">
+        <if test="isFree">
+          and credit = 0
+        </if>
+        <if test="!isFree">
+          and credit > 0
+        </if>
+      </if>
+      <if test="statusList != null">
+        and status in
+        <foreach collection="statusList" item="status" open="(" close=")" separator=",">
+          #{status}
+        </foreach>
+      </if>
+    </where>
+  </select>
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List" />
+    from t_activity
+    <where>
+      <if test="name != null and name != ''">
+        name like "%"#{name}"%"
+      </if>
+      <if test="isFree != null">
+        <if test="isFree">
+          and credit = 0
+        </if>
+        <if test="!isFree">
+          and credit > 0
+        </if>
+      </if>
+      <if test="statusList != null">
+        and status in
+        <foreach collection="statusList" item="status" open="(" close=")" separator=",">
+          #{status}
+        </foreach>
+      </if>
+    </where>
+    order by status, start_time
+    limit #{index},#{pageSize}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List" />
+    from t_activity
+    where name = #{name}
+  </select>
+</mapper>

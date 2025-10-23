@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.KnowledgeMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.Knowledge">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="audit_user_code" jdbcType="VARCHAR" property="auditUserCode" />
+    <result column="credit" jdbcType="INTEGER" property="credit" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="category_type" jdbcType="INTEGER" property="categoryType" />
+    <result column="download_num" jdbcType="INTEGER" property="downloadNum" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, user_code, title, brief, deleted, audit_user_code, credit, status, download_num, category_type, priority,
+    create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_knowledge
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_knowledge
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.Knowledge">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_knowledge (code, user_code, title, 
+      brief, deleted, audit_user_code, 
+      credit, status, download_num, category_type, priority,
+      create_date, update_date)
+    values (#{code,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{brief,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{auditUserCode,jdbcType=VARCHAR}, 
+      #{credit,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{downloadNum,jdbcType=INTEGER}, #{categoryType,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER},
+      #{createDate,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.Knowledge">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_knowledge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="brief != null">
+        brief,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="auditUserCode != null">
+        audit_user_code,
+      </if>
+      <if test="credit != null">
+        credit,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="downloadNum != null">
+        download_num,
+      </if>
+      <if test="categoryType != null">
+        category_type,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null">
+        #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+      <if test="auditUserCode != null">
+        #{auditUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="downloadNum != null">
+        #{downloadNum,jdbcType=INTEGER},
+      </if>
+      <if test="categoryType != null">
+        #{categoryType,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.Knowledge">
+    update t_knowledge
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null">
+        brief = #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+      <if test="auditUserCode != null">
+        audit_user_code = #{auditUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        credit = #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="downloadNum != null">
+        download_num = #{downloadNum,jdbcType=INTEGER},
+      </if>
+      <if test="categoryType != null">
+        category_type = #{categoryType,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.Knowledge">
+    update t_knowledge
+    set code = #{code,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT},
+      audit_user_code = #{auditUserCode,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      download_num = #{downloadNum,jdbcType=INTEGER},
+      category_type = #{categoryType,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_knowledge
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_knowledge.id, t_knowledge.code, t_knowledge.user_code, t_knowledge.title, t_knowledge.brief, 
+    t_knowledge.deleted, t_knowledge.audit_user_code, t_knowledge.credit, t_knowledge.status, 
+    t_knowledge.download_num, t_knowledge.category_type, t_knowledge.priority, t_knowledge.create_date, t_knowledge.update_date
+  </sql>
+</mapper>

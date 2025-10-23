@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.MessageBoardMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.MessageBoard">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="is_read" jdbcType="BIT" property="isRead" />
+    <result column="reply_content" jdbcType="VARCHAR" property="replyContent" />
+    <result column="reply_code" jdbcType="VARCHAR" property="replyCode" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="reply_date" jdbcType="VARCHAR" property="replyDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, user_code, content, status, is_read, reply_content, reply_code, create_date, 
+    reply_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_message_board
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_message_board
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.MessageBoard">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_message_board (code, user_code, content, 
+      status, is_read, reply_content, 
+      reply_code, create_date, reply_date
+      )
+    values (#{code,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{isRead,jdbcType=BIT}, #{replyContent,jdbcType=VARCHAR}, 
+      #{replyCode,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{replyDate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.MessageBoard">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_message_board
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isRead != null">
+        is_read,
+      </if>
+      <if test="replyContent != null">
+        reply_content,
+      </if>
+      <if test="replyCode != null">
+        reply_code,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="replyDate != null">
+        reply_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isRead != null">
+        #{isRead,jdbcType=BIT},
+      </if>
+      <if test="replyContent != null">
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyCode != null">
+        #{replyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="replyDate != null">
+        #{replyDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.MessageBoard">
+    update t_message_board
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isRead != null">
+        is_read = #{isRead,jdbcType=BIT},
+      </if>
+      <if test="replyContent != null">
+        reply_content = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyCode != null">
+        reply_code = #{replyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="replyDate != null">
+        reply_date = #{replyDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.MessageBoard">
+    update t_message_board
+    set code = #{code,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      is_read = #{isRead,jdbcType=BIT},
+      reply_content = #{replyContent,jdbcType=VARCHAR},
+      reply_code = #{replyCode,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      reply_date = #{replyDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_message_board
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_message_board.id, t_message_board.code, t_message_board.user_code, t_message_board.content, 
+    t_message_board.status, t_message_board.is_read, t_message_board.reply_content, t_message_board.reply_code, 
+    t_message_board.create_date, t_message_board.reply_date
+  </sql>
+</mapper>

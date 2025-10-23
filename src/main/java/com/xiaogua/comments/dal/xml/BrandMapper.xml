@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.BrandMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.Brand">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name_cn" jdbcType="VARCHAR" property="nameCn" />
+    <result column="name_en" jdbcType="VARCHAR" property="nameEn" />
+    <result column="inital" jdbcType="VARCHAR" property="inital" />
+    <result column="logo_code" jdbcType="VARCHAR" property="logoCode" />
+    <result column="application" jdbcType="VARCHAR" property="application" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="series" jdbcType="VARCHAR" property="series" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, name_cn, name_en, inital, logo_code, application, brief, series, url, comment_num, 
+    create_date, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_brand
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_brand
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.Brand">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_brand (code, name_cn, name_en, 
+      inital, logo_code, application, 
+      brief, series, url, 
+      comment_num, create_date, deleted
+      )
+    values (#{code,jdbcType=VARCHAR}, #{nameCn,jdbcType=VARCHAR}, #{nameEn,jdbcType=VARCHAR}, 
+      #{inital,jdbcType=VARCHAR}, #{logoCode,jdbcType=VARCHAR}, #{application,jdbcType=VARCHAR}, 
+      #{brief,jdbcType=VARCHAR}, #{series,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{commentNum,jdbcType=INTEGER}, #{createDate,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.Brand">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_brand
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="nameCn != null">
+        name_cn,
+      </if>
+      <if test="nameEn != null">
+        name_en,
+      </if>
+      <if test="inital != null">
+        inital,
+      </if>
+      <if test="logoCode != null">
+        logo_code,
+      </if>
+      <if test="application != null">
+        application,
+      </if>
+      <if test="brief != null">
+        brief,
+      </if>
+      <if test="series != null">
+        series,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="commentNum != null">
+        comment_num,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCn != null">
+        #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEn != null">
+        #{nameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="inital != null">
+        #{inital,jdbcType=VARCHAR},
+      </if>
+      <if test="logoCode != null">
+        #{logoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="application != null">
+        #{application,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null">
+        #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="series != null">
+        #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.Brand">
+    update t_brand
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCn != null">
+        name_cn = #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEn != null">
+        name_en = #{nameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="inital != null">
+        inital = #{inital,jdbcType=VARCHAR},
+      </if>
+      <if test="logoCode != null">
+        logo_code = #{logoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="application != null">
+        application = #{application,jdbcType=VARCHAR},
+      </if>
+      <if test="brief != null">
+        brief = #{brief,jdbcType=VARCHAR},
+      </if>
+      <if test="series != null">
+        series = #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="commentNum != null">
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.Brand">
+    update t_brand
+    set code = #{code,jdbcType=VARCHAR},
+      name_cn = #{nameCn,jdbcType=VARCHAR},
+      name_en = #{nameEn,jdbcType=VARCHAR},
+      inital = #{inital,jdbcType=VARCHAR},
+      logo_code = #{logoCode,jdbcType=VARCHAR},
+      application = #{application,jdbcType=VARCHAR},
+      brief = #{brief,jdbcType=VARCHAR},
+      series = #{series,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      comment_num = #{commentNum,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_brand
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_brand.id, t_brand.code, t_brand.name_cn, t_brand.name_en, t_brand.inital, t_brand.logo_code, 
+    t_brand.application, t_brand.brief, t_brand.series, t_brand.url, t_brand.comment_num, 
+    t_brand.create_date, t_brand.deleted
+  </sql>
+</mapper>

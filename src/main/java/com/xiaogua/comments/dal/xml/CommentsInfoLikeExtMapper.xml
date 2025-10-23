@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.CommentsInfoLikeMapper">
+    <select id="selectByCommentsCodeAndUserCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_comments_info_like
+        where
+        comments_code = #{commentsCode}
+        and user_code = #{userCode}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*)
+        from t_comments_info_like
+        where comments_code = #{commentsInfoCode}
+        <if test="startDate != null and endDate != null">
+            and create_date between #{startDate} and #{endDate}
+        </if>
+    </select>
+</mapper>

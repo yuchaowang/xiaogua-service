@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.UserMapper">
+    <select id="selectByMobile" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where mobile = #{mobile}
+    </select>
+    <select id="selectByCodeAndPassword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where code = #{code}
+        and password = #{password}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from t_user
+        where 1 = 1
+        <if test="keywords != null">
+            and (name like "%"#{keywords}"%" or mobile like "%"#{keywords}"%" or email like "%"#{keywords}"%")
+        </if>
+        <if test="sex != null">
+            and sex = #{sex}
+        </if>
+        <if test="province != null">
+            and province = #{province}
+        </if>
+        <if test="city != null">
+            and city = #{city}
+        </if>
+        <if test="registerStartDate != null">
+            and create_date &gt;= #{registerStartDate}
+        </if>
+        <if test="registerEndDate != null">
+            and create_date &lt;= #{registerEndDate}
+        </if>
+    </select>
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_user
+        where 1 = 1
+        <if test="keywords != null">
+            and (name like "%"#{keywords}"%" or mobile like "%"#{keywords}"%" or email like "%"#{keywords}"%")
+        </if>
+        <if test="sex != null">
+            and sex = #{sex}
+        </if>
+        <if test="province != null">
+            and province = #{province}
+        </if>
+        <if test="city != null">
+            and city = #{city}
+        </if>
+        <if test="registerStartDate != null">
+            and create_date &gt;= #{registerStartDate}
+        </if>
+        <if test="registerEndDate != null">
+            and create_date &lt;= #{registerEndDate}
+        </if>
+        order by create_date desc
+        limit #{index},#{pageSize}
+    </select>
+
+    <select id="selectAllUserCode" resultType="string">
+        select code from t_user
+    </select>
+
+    <delete id="deleteByWxOpenid">
+        delete from t_user where wx_open_id = #{wxOpenid}
+    </delete>
+</mapper>

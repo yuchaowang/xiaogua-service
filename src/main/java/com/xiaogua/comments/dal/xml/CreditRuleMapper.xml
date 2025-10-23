@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.CreditRuleMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.CreditRule">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="domain" jdbcType="INTEGER" property="domain" />
+    <result column="event" jdbcType="INTEGER" property="event" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="most" jdbcType="INTEGER" property="most" />
+    <result column="cycle" jdbcType="VARCHAR" property="cycle" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, name, domain, event, type, num, most, cycle, times, update_date, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_credit_rule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_credit_rule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.CreditRule">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_credit_rule (code, name, domain, 
+      event, type, num, most, 
+      cycle, times, update_date, 
+      create_date)
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{domain,jdbcType=INTEGER}, 
+      #{event,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{most,jdbcType=INTEGER}, 
+      #{cycle,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER}, #{updateDate,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.CreditRule">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_credit_rule
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="domain != null">
+        domain,
+      </if>
+      <if test="event != null">
+        event,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="most != null">
+        most,
+      </if>
+      <if test="cycle != null">
+        cycle,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        #{domain,jdbcType=INTEGER},
+      </if>
+      <if test="event != null">
+        #{event,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="most != null">
+        #{most,jdbcType=INTEGER},
+      </if>
+      <if test="cycle != null">
+        #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.CreditRule">
+    update t_credit_rule
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null">
+        domain = #{domain,jdbcType=INTEGER},
+      </if>
+      <if test="event != null">
+        event = #{event,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="most != null">
+        most = #{most,jdbcType=INTEGER},
+      </if>
+      <if test="cycle != null">
+        cycle = #{cycle,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.CreditRule">
+    update t_credit_rule
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      domain = #{domain,jdbcType=INTEGER},
+      event = #{event,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      most = #{most,jdbcType=INTEGER},
+      cycle = #{cycle,jdbcType=VARCHAR},
+      times = #{times,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_credit_rule
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_credit_rule.id, t_credit_rule.code, t_credit_rule.name, t_credit_rule.domain, t_credit_rule.event, 
+    t_credit_rule.type, t_credit_rule.num, t_credit_rule.most, t_credit_rule.cycle, t_credit_rule.times, 
+    t_credit_rule.update_date, t_credit_rule.create_date
+  </sql>
+</mapper>

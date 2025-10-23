@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.KnowledgeConsumeMapper">
+    <select id="selectByKnowledgeCodeAndUserCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_knowledge_consume
+        where knowledge_code = #{knowledgeCode}
+          and user_code = #{userCode}
+    </select>
+
+    <select id="countByKnowledgeCode" resultType="java.lang.Integer">
+        select count(1)
+        from  t_knowledge_consume
+        where knowledge_code = #{knowledgeCode}
+    </select>
+</mapper>

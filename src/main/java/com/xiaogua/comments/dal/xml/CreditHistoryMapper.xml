@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.CreditHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.CreditHistory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="event" jdbcType="INTEGER" property="event" />
+    <result column="rel_code" jdbcType="VARCHAR" property="relCode" />
+    <result column="rel_user_code" jdbcType="VARCHAR" property="relUserCode" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, user_code, type, num, event, rel_code, rel_user_code, update_date, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_credit_history
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_credit_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.CreditHistory">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_credit_history (code, user_code, type, 
+      num, event, rel_code, 
+      rel_user_code, update_date, create_date
+      )
+    values (#{code,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{num,jdbcType=INTEGER}, #{event,jdbcType=INTEGER}, #{relCode,jdbcType=VARCHAR}, 
+      #{relUserCode,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.CreditHistory">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_credit_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="event != null">
+        event,
+      </if>
+      <if test="relCode != null">
+        rel_code,
+      </if>
+      <if test="relUserCode != null">
+        rel_user_code,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="event != null">
+        #{event,jdbcType=INTEGER},
+      </if>
+      <if test="relCode != null">
+        #{relCode,jdbcType=VARCHAR},
+      </if>
+      <if test="relUserCode != null">
+        #{relUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.CreditHistory">
+    update t_credit_history
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="event != null">
+        event = #{event,jdbcType=INTEGER},
+      </if>
+      <if test="relCode != null">
+        rel_code = #{relCode,jdbcType=VARCHAR},
+      </if>
+      <if test="relUserCode != null">
+        rel_user_code = #{relUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.CreditHistory">
+    update t_credit_history
+    set code = #{code,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      event = #{event,jdbcType=INTEGER},
+      rel_code = #{relCode,jdbcType=VARCHAR},
+      rel_user_code = #{relUserCode,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_credit_history
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_credit_history.id, t_credit_history.code, t_credit_history.user_code, t_credit_history.type, 
+    t_credit_history.num, t_credit_history.event, t_credit_history.rel_code, t_credit_history.rel_user_code, 
+    t_credit_history.update_date, t_credit_history.create_date
+  </sql>
+</mapper>

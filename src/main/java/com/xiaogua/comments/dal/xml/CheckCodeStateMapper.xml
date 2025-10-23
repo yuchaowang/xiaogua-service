@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.CheckCodeStateMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.CheckCodeState">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="checkcode" jdbcType="VARCHAR" property="checkcode" />
+    <result column="cacheKey" jdbcType="VARCHAR" property="cachekey" />
+    <result column="expir" jdbcType="TIMESTAMP" property="expir" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, checkcode, cacheKey, expir
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_checkcode_state
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_checkcode_state
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.CheckCodeState">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_checkcode_state (code, checkcode, cacheKey, 
+      expir)
+    values (#{code,jdbcType=VARCHAR}, #{checkcode,jdbcType=VARCHAR}, #{cachekey,jdbcType=VARCHAR}, 
+      #{expir,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.CheckCodeState">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_checkcode_state
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="checkcode != null">
+        checkcode,
+      </if>
+      <if test="cachekey != null">
+        cacheKey,
+      </if>
+      <if test="expir != null">
+        expir,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcode != null">
+        #{checkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cachekey != null">
+        #{cachekey,jdbcType=VARCHAR},
+      </if>
+      <if test="expir != null">
+        #{expir,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.CheckCodeState">
+    update t_checkcode_state
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcode != null">
+        checkcode = #{checkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="cachekey != null">
+        cacheKey = #{cachekey,jdbcType=VARCHAR},
+      </if>
+      <if test="expir != null">
+        expir = #{expir,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.CheckCodeState">
+    update t_checkcode_state
+    set code = #{code,jdbcType=VARCHAR},
+      checkcode = #{checkcode,jdbcType=VARCHAR},
+      cacheKey = #{cachekey,jdbcType=VARCHAR},
+      expir = #{expir,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_checkcode_state
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_checkcode_state.id, t_checkcode_state.code, t_checkcode_state.checkcode, t_checkcode_state.cacheKey, 
+    t_checkcode_state.expir
+  </sql>
+</mapper>

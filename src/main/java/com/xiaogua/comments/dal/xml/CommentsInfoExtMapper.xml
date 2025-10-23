@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.CommentsInfoMapper">
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from t_comments_info
+        where 1 = 1
+        <if test="!showDeleted">
+            and deleted = 0
+        </if>
+        <if test="toCode != null">
+            and to_code = #{toCode}
+        </if>
+        <if test="userCode != null">
+            and user_code = #{userCode}
+        </if>
+        <if test="userType != null">
+            and user_type = #{userType}
+        </if>
+    </select>
+    <select id="findPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_comments_info
+        where 1 = 1
+        <if test="!showDeleted">
+            and deleted = 0
+        </if>
+        <if test="toCode != null">
+            and to_code = #{toCode}
+        </if>
+        <if test="userCode != null">
+            and user_code = #{userCode}
+        </if>
+        <if test="userType != null">
+            and user_type = #{userType}
+        </if>
+        order by
+        <if test="sort == 'likeNum'">
+            like_num desc,
+        </if>
+        create_date desc
+        limit #{index},#{pageSize}
+    </select>
+    <select id="selectByCodeWithoutDel" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_comments_info
+        where code = #{code,jdbcType=VARCHAR}
+        and deleted = 0
+    </select>
+
+    <select id="selectDistinctBrandCodeOrderByCommentCreateDate" resultType="String">
+        select to_code from  t_comments_info
+            where deleted = 0
+            group by to_code
+            order by max(create_date) desc limit #{limit}
+    </select>
+
+    <select id="sumLikeByBrand" resultType="java.lang.Integer">
+        select sum(like_num)
+        from t_comments_info
+        where to_code = #{brandCode}
+    </select>
+
+    <select id="selectMaxLikeNumCommentsInfoByBrand" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_comments_info
+        where to_code = #{brandCode}
+        order by like_num desc
+        limit 1
+    </select>
+</mapper>

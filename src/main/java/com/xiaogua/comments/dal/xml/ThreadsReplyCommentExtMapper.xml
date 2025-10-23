@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.ThreadsReplyCommentMapper">
+  <select id="count" resultType="java.lang.Integer">
+    select count(1)
+    from t_threads_reply_comment
+    where reply_code = #{replyCode}
+    <if test="!showDeleted">
+      and deleted = 0
+    </if>
+  </select>
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_threads_reply_comment
+    where reply_code = #{replyCode}
+    <if test="!showDeleted">
+      and deleted = 0
+    </if>
+    order by create_date
+    limit #{index},#{pageSize}
+  </select>
+</mapper>

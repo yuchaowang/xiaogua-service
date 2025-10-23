@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.UserTypeApplyMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.UserTypeApply">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="user_type_code" jdbcType="VARCHAR" property="userTypeCode" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="opinions" jdbcType="VARCHAR" property="opinions" />
+    <result column="audit_user_code" jdbcType="VARCHAR" property="auditUserCode" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, user_type_code, user_code, type, status, opinions, audit_user_code, create_date, 
+    update_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_type_apply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user_type_apply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.UserTypeApply">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user_type_apply (code, user_type_code, user_code, 
+      type, status, opinions, 
+      audit_user_code, create_date, update_date
+      )
+    values (#{code,jdbcType=VARCHAR}, #{userTypeCode,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{opinions,jdbcType=VARCHAR}, 
+      #{auditUserCode,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.UserTypeApply">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user_type_apply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="userTypeCode != null">
+        user_type_code,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="opinions != null">
+        opinions,
+      </if>
+      <if test="auditUserCode != null">
+        audit_user_code,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userTypeCode != null">
+        #{userTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="opinions != null">
+        #{opinions,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserCode != null">
+        #{auditUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.UserTypeApply">
+    update t_user_type_apply
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userTypeCode != null">
+        user_type_code = #{userTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="opinions != null">
+        opinions = #{opinions,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserCode != null">
+        audit_user_code = #{auditUserCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.UserTypeApply">
+    update t_user_type_apply
+    set code = #{code,jdbcType=VARCHAR},
+      user_type_code = #{userTypeCode,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      opinions = #{opinions,jdbcType=VARCHAR},
+      audit_user_code = #{auditUserCode,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_type_apply
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_user_type_apply.id, t_user_type_apply.code, t_user_type_apply.user_type_code, t_user_type_apply.user_code, 
+    t_user_type_apply.type, t_user_type_apply.status, t_user_type_apply.opinions, t_user_type_apply.audit_user_code, 
+    t_user_type_apply.create_date, t_user_type_apply.update_date
+  </sql>
+</mapper>

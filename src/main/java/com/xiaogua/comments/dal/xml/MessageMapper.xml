@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.Message">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="is_read" jdbcType="BIT" property="isRead" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xiaogua.comments.dal.entity.Message">
+    <result column="params" jdbcType="LONGVARCHAR" property="params" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, group_id, user_code, content, type, is_read, params, create_date, update_date
+  </sql>
+  <sql id="Blob_Column_List">
+    params
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByPrimaryGroupId">
+    delete from t_message
+    where group_id = #{groupId}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.Message">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_message (code, group_id, user_code, content, type,
+      is_read, create_date, update_date, 
+      params)
+    values (#{code,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+      #{isRead,jdbcType=BIT}, #{createDate,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, 
+      #{params,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.Message">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="isRead != null">
+        is_read,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="params != null">
+        params,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="isRead != null">
+        #{isRead,jdbcType=BIT},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.Message">
+    update t_message
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="isRead != null">
+        is_read = #{isRead,jdbcType=BIT},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        params = #{params,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiaogua.comments.dal.entity.Message">
+    update t_message
+    set code = #{code,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      is_read = #{isRead,jdbcType=BIT},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      params = #{params,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.Message">
+    update t_message
+    set code = #{code,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      is_read = #{isRead,jdbcType=BIT},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_message
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_message.id, t_message.code, t_message.group_id, t_message.user_code, t_message.content, t_message.type, t_message.is_read,
+    t_message.create_date, t_message.update_date
+  </sql>
+
+  <select id="count" resultType="java.lang.Integer">
+     select count(1)
+        from t_message
+     where 1 = 1
+     <if test="userCode != null and userCode != ''">
+       and user_code = #{userCode}
+     </if>
+    <if test="keyword != null and keyword != ''">
+      and content like concat('%', #{keyword}, '%')
+    </if>
+    <if test="startTime != null">
+      and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.startTime},'%y%m%d')
+    </if>
+    <if test="endTime != null">
+      and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.startTime},'%y%m%d')
+    </if>
+    <if test="isRead != null">
+      and is_read = #{isRead}
+    </if>
+    <if test="type != null">
+      and type = #{type}
+    </if>
+  </select>
+
+  <select id="groupByCount" resultType="java.lang.Integer">
+    select count(1)
+    from
+     (select count(1) from t_message where 1 = 1
+     <if test="userCode != null and userCode != ''">
+        and user_code = #{userCode}
+    </if>
+    <if test="keyword != null and keyword != ''">
+      and content like concat('%', #{keyword}, '%')
+    </if>
+    <if test="startTime != null">
+      and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.startTime},'%y%m%d')
+    </if>
+    <if test="endTime != null">
+      and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.startTime},'%y%m%d')
+    </if>
+    <if test="isRead != null">
+      and is_read = #{isRead}
+    </if>
+    <if test="type != null">
+      and type = #{type}
+    </if>
+    group by group_id) tmp
+  </select>
+
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_message
+    where 1 = 1
+    <if test="userCode != null and userCode != ''">
+      and user_code = #{userCode}
+    </if>
+    <if test="keyword != null and keyword != ''">
+      and content like concat('%', #{keyword}, '%')
+    </if>
+    <if test="startTime != null">
+      and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.startTime},'%y%m%d')
+    </if>
+    <if test="endTime != null">
+      and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.startTime},'%y%m%d')
+    </if>
+    <if test="isRead != null">
+      and is_read = #{isRead}
+    </if>
+    <if test="type != null">
+      and type = #{type}
+    </if>
+    <if test="isGroupId != null and isGroupId == 1">
+      group by group_id
+    </if>
+    order by create_time desc
+    limit #{index},#{pageSize}
+  </select>
+  <update id="updateMessage">
+    update t_message set is_read = 1
+    where 1 = 1 and user_code = #{userCode}
+    <if test="messageCode != null and messageCode != ''">
+      and code = #{messageCode}
+    </if>
+  </update>
+</mapper>

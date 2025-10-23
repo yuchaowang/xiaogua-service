@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.ActivityMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.Activity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="start_time" jdbcType="VARCHAR" property="startTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="organizer" jdbcType="VARCHAR" property="organizer" />
+    <result column="contractor" jdbcType="VARCHAR" property="contractor" />
+    <result column="supporter" jdbcType="VARCHAR" property="supporter" />
+    <result column="credit" jdbcType="INTEGER" property="credit" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="title_page_code" jdbcType="VARCHAR" property="titlePageCode" />
+    <result column="streaming_url" jdbcType="VARCHAR" property="streamingUrl" />
+    <result column="streaming_id" jdbcType="VARCHAR" property="streamingId" />
+    <result column="update_date" jdbcType="VARCHAR" property="updateDate" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.xiaogua.comments.dal.entity.Activity">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, user_code, name, start_time, end_time, address, organizer, contractor, 
+    supporter, credit, status, title_page_code, streaming_url, streaming_id, update_date, 
+    create_date
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_activity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_activity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.Activity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_activity (code, user_code, name, 
+      start_time, end_time, address, 
+      organizer, contractor, supporter, 
+      credit, status, title_page_code, 
+      streaming_url, streaming_id, update_date, 
+      create_date, description)
+    values (#{code,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{organizer,jdbcType=VARCHAR}, #{contractor,jdbcType=VARCHAR}, #{supporter,jdbcType=VARCHAR}, 
+      #{credit,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{titlePageCode,jdbcType=VARCHAR}, 
+      #{streamingUrl,jdbcType=VARCHAR}, #{streamingId,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.Activity">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_activity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="organizer != null">
+        organizer,
+      </if>
+      <if test="contractor != null">
+        contractor,
+      </if>
+      <if test="supporter != null">
+        supporter,
+      </if>
+      <if test="credit != null">
+        credit,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="titlePageCode != null">
+        title_page_code,
+      </if>
+      <if test="streamingUrl != null">
+        streaming_url,
+      </if>
+      <if test="streamingId != null">
+        streaming_id,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="organizer != null">
+        #{organizer,jdbcType=VARCHAR},
+      </if>
+      <if test="contractor != null">
+        #{contractor,jdbcType=VARCHAR},
+      </if>
+      <if test="supporter != null">
+        #{supporter,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="titlePageCode != null">
+        #{titlePageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="streamingUrl != null">
+        #{streamingUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="streamingId != null">
+        #{streamingId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.Activity">
+    update t_activity
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="organizer != null">
+        organizer = #{organizer,jdbcType=VARCHAR},
+      </if>
+      <if test="contractor != null">
+        contractor = #{contractor,jdbcType=VARCHAR},
+      </if>
+      <if test="supporter != null">
+        supporter = #{supporter,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        credit = #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="titlePageCode != null">
+        title_page_code = #{titlePageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="streamingUrl != null">
+        streaming_url = #{streamingUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="streamingId != null">
+        streaming_id = #{streamingId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xiaogua.comments.dal.entity.Activity">
+    update t_activity
+    set code = #{code,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      organizer = #{organizer,jdbcType=VARCHAR},
+      contractor = #{contractor,jdbcType=VARCHAR},
+      supporter = #{supporter,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      title_page_code = #{titlePageCode,jdbcType=VARCHAR},
+      streaming_url = #{streamingUrl,jdbcType=VARCHAR},
+      streaming_id = #{streamingId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.Activity">
+    update t_activity
+    set code = #{code,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      organizer = #{organizer,jdbcType=VARCHAR},
+      contractor = #{contractor,jdbcType=VARCHAR},
+      supporter = #{supporter,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      title_page_code = #{titlePageCode,jdbcType=VARCHAR},
+      streaming_url = #{streamingUrl,jdbcType=VARCHAR},
+      streaming_id = #{streamingId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_activity
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_activity.id, t_activity.code, t_activity.user_code, t_activity.name, t_activity.start_time, 
+    t_activity.end_time, t_activity.address, t_activity.organizer, t_activity.contractor, 
+    t_activity.supporter, t_activity.credit, t_activity.status, t_activity.title_page_code, 
+    t_activity.streaming_url, t_activity.streaming_id, t_activity.update_date, t_activity.create_date
+  </sql>
+</mapper>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.CommentsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.xiaogua.comments.dal.entity.CommentsInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="user_code" jdbcType="VARCHAR" property="userCode" />
+    <result column="to_code" jdbcType="VARCHAR" property="toCode" />
+    <result column="from_name" jdbcType="VARCHAR" property="fromName" />
+    <result column="from_avatar" jdbcType="VARCHAR" property="fromAvatar" />
+    <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="user_type" jdbcType="INTEGER" property="userType" />
+    <result column="deleted" jdbcType="BIT" property="deleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, user_code, to_code, from_name, from_avatar, like_num, content, create_date, 
+    user_type, deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_comments_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_comments_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xiaogua.comments.dal.entity.CommentsInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_comments_info (code, user_code, to_code, 
+      from_name, from_avatar, like_num, 
+      content, create_date, user_type, 
+      deleted)
+    values (#{code,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, #{toCode,jdbcType=VARCHAR}, 
+      #{fromName,jdbcType=VARCHAR}, #{fromAvatar,jdbcType=VARCHAR}, #{likeNum,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{userType,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaogua.comments.dal.entity.CommentsInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_comments_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+      <if test="toCode != null">
+        to_code,
+      </if>
+      <if test="fromName != null">
+        from_name,
+      </if>
+      <if test="fromAvatar != null">
+        from_avatar,
+      </if>
+      <if test="likeNum != null">
+        like_num,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="toCode != null">
+        #{toCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fromName != null">
+        #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAvatar != null">
+        #{fromAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null">
+        #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiaogua.comments.dal.entity.CommentsInfo">
+    update t_comments_info
+    <set>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="toCode != null">
+        to_code = #{toCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fromName != null">
+        from_name = #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAvatar != null">
+        from_avatar = #{fromAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null">
+        like_num = #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiaogua.comments.dal.entity.CommentsInfo">
+    update t_comments_info
+    set code = #{code,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      to_code = #{toCode,jdbcType=VARCHAR},
+      from_name = #{fromName,jdbcType=VARCHAR},
+      from_avatar = #{fromAvatar,jdbcType=VARCHAR},
+      like_num = #{likeNum,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=INTEGER},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_comments_info
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <sql id="Table_Base_Column_List">
+    t_comments_info.id, t_comments_info.code, t_comments_info.user_code, t_comments_info.to_code, 
+    t_comments_info.from_name, t_comments_info.from_avatar, t_comments_info.like_num, 
+    t_comments_info.content, t_comments_info.create_date, t_comments_info.user_type, 
+    t_comments_info.deleted
+  </sql>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaogua.comments.dal.mapper.ActivityUserMapper">
+  <select id="selectByActivityCodeAndUserCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_activity_user
+    where activity_code = #{activityCode}
+      and user_code = #{userCode}
+  </select>
+  <select id="count" resultType="java.lang.Integer">
+    select count(1)
+    from t_activity_user
+    <where>
+      <if test="activityCode != null and activityCode != ''">
+        activity_code = #{activityCode}
+      </if>
+      <if test="userCode != null and userCode != ''">
+        user_code = #{userCode}
+      </if>
+    </where>
+  </select>
+  <select id="findPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_activity_user
+    <where>
+      <if test="activityCode != null and activityCode != ''">
+        activity_code = #{activityCode}
+      </if>
+      <if test="userCode != null and userCode != ''">
+        user_code = #{userCode}
+      </if>
+    </where>
+    order by
+    create_date desc
+    limit #{index},#{pageSize}
+  </select>
+  <select id="findByActivityCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_activity_user
+    where activity_code = #{activityCode}
+    order by
+    create_date asc
+  </select>
+</mapper>

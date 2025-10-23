@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.5.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.xiaogua</groupId>
+    <artifactId>comments</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>comments</name>
+    <description>xiaogua-comments</description>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <xiaogua-mybatis-utils.version>${spring.active.profile}-1.2-SNAPSHOT</xiaogua-mybatis-utils.version>
+        <xiaogua-exception-utils.version>${spring.active.profile}-1.2-SNAPSHOT</xiaogua-exception-utils.version>
+        <xiaogua-bizcode-utils.version>${spring.active.profile}-1.2-SNAPSHOT</xiaogua-bizcode-utils.version>
+        <com.xiaogua.framework.version>${spring.active.profile}-1.2-SNAPSHOT</com.xiaogua.framework.version>
+        <spring-boot-configuration-processor.version>1.5.11.RELEASE</spring-boot-configuration-processor.version>
+        <xiaogua-math-utils.version>${spring.active.profile}-1.0-SNAPSHOT</xiaogua-math-utils.version>
+        <mybatis-spring-boot-start.version>1.3.2</mybatis-spring-boot-start.version>
+        <mysql.connector.java.version>6.0.6</mysql.connector.java.version>
+        <org.apache.poi.version>3.16</org.apache.poi.version>
+        <org.jxls.jxls.version>2.4.1</org.jxls.jxls.version>
+        <org.jxls.jxls-poi.version>1.0.13</org.jxls.jxls-poi.version>
+        <org.jxls.jxls-jexcel.version>1.0.6</org.jxls.jxls-jexcel.version>
+        <fast-json.version>1.2.47</fast-json.version>
+        <io.minio>8.0.3</io.minio>
+    </properties>
+
+    <!--######################## basic  start ###################################-->
+    <dependencies>
+        <dependency>
+            <groupId>com.flipkart.zjsonpatch</groupId>
+            <artifactId>zjsonpatch</artifactId>
+            <version>0.4.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xiaogua.framework</groupId>
+            <artifactId>xiaogua-base-dependencies</artifactId>
+            <version>${com.xiaogua.framework.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.xiaogua.framework</groupId>
+            <artifactId>xiaogua-exception-utils</artifactId>
+            <version>${xiaogua-exception-utils.version}</version>
+        </dependency>
+        <!-- junit -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- spring boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${spring-boot-configuration-processor.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis-spring-boot-start.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xiaogua.framework</groupId>
+            <artifactId>xiaogua-mybatis-utils</artifactId>
+            <version>${xiaogua-mybatis-utils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xiaogua.framework</groupId>
+            <artifactId>xiaogua-bizcode-utils</artifactId>
+            <version>${xiaogua-bizcode-utils.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fast-json.version}</version>
+        </dependency>
+
+        <!--pinyin4j-->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
+        <!--guava-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>21.0</version>
+        </dependency>
+
+        <!--minio-->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${io.minio}</version>
+        </dependency>
+
+        <!--redis依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!--swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+
+        <!--tx-sdk-java-->
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
+            <version>4.0.11</version>
+        </dependency>
+
+        <!--加密工具类-->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.59</version>
+        </dependency>
+
+        <!--jxls-->
+        <dependency>
+            <groupId>org.jxls</groupId>
+            <artifactId>jxls</artifactId>
+            <version>${org.jxls.jxls.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jxls</groupId>
+            <artifactId>jxls-poi</artifactId>
+            <version>${org.jxls.jxls-poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jxls</groupId>
+            <artifactId>jxls-jexcel</artifactId>
+            <version>${org.jxls.jxls-jexcel.version}</version>
+        </dependency>
+
+        <!--lombock-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <!-- 发布release仓库 -->
+        <repository>
+            <id>rdc-releases</id>
+            <url>https://repo.rdc.aliyun.com/repository/135715-release-kbJxZa/</url>
+        </repository>
+        <!-- 发布快照版本 -->
+        <snapshotRepository>
+            <id>rdc-snapshots</id>
+            <url>https://repo.rdc.aliyun.com/repository/135715-snapshot-y6UJ73/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <finalName>xiaogua-comments-service</finalName>
+        <!-- 开启资源文件过滤  -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>jxls/*.xls</exclude>
+                    <exclude>jxls/*.xlsx</exclude>
+                </excludes>
+                <targetPath>${project.build.directory}/classes</targetPath>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>jxls/*.xls</include>
+                    <include>jxls/*.xlsx</include>
+                </includes>
+                <targetPath>${project.build.directory}/classes</targetPath>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.11.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <!-- 设置打包过程中不编译单元测试代码 TEST -->
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.7</version>
+                <configuration>
+                    <!--mybatis的代码生成器的配置文件-->
+                    <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
+                    <!--允许覆盖生成文件-->
+                    <overwrite>true</overwrite>
+                    <!--将当前pom依赖添加到生成器的类路径中-->
+                    <includeAllDependencies>true</includeAllDependencies>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!--开发环境-->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <spring.active.profile>dev</spring.active.profile>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!--测试环境-->
+        <profile>
+            <id>test</id>
+            <properties>
+                <spring.active.profile>test</spring.active.profile>
+            </properties>
+        </profile>
+        <!--生产环境-->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <spring.active.profile>prod</spring.active.profile>
+            </properties>
+        </profile>
+    </profiles>
+</project>
